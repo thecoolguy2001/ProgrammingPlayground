@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Functional Programming Playground</title>
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <!-- CodeMirror Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/monokai.min.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Functional Programming Playground</h1>
+    </header>
+
+    <main>
+        <section id="editor-section">
+            <h2>Your Code</h2>
+            <div id="editor"></div>
+            <button id="runBtn">Run Code</button>
+        </section>
+        <aside id="output-section">
+            <h2>Output</h2>
+            <div id="output"></div>
+            <p>Try something like:</p>
+            <pre>x = 10 * 2
+x + 5</pre>
+        </aside>
+    </main>
+
+    <footer>
+        <p>©Demonte Walker 2024</p>
+    </footer>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script>
+        let editor = CodeMirror(document.getElementById('editor'), {
+            value: "Hello! Try me!",
+            mode: "javascript",
+            lineNumbers: true,
+            theme: "monokai"
+        });
+
+        document.getElementById('runBtn').addEventListener('click', function() {
+            let code = editor.getValue();
+            fetch('/run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ 'code': code })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('output').classList.add('error');
+                    document.getElementById('output').innerText = "Error: " + data.error;
+                } else {
+                    document.getElementById('output').classList.remove('error');
+                    document.getElementById('output').innerText = "Result: " + data.result;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

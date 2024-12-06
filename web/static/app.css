@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f0f0f0;
+    color: #333;
+}
+
+header, footer {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header h1, footer p {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    gap: 20px; /* Space between columns */
+}
+
+/* Editor Section */
+#editor-section {
+    flex: 2;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#editor-section h2 {
+    margin-top: 0;
+}
+
+#editor {
+    border: 1px solid #ccc;
+    height: 300px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#runBtn {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 3px;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+#runBtn:hover {
+    background: #218838;
+}
+
+/* Output Section */
+#output-section {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#output-section h2 {
+    margin-top: 0;
+}
+
+#output {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    font-size: 14px;
+    min-height: 50px;
+    white-space: pre-wrap;
+    border-radius: 3px;
+    position: relative;
+    z-index: 9999; 
+}
+
+#output.error {
+    color: #ff0000;
+}
+
+/* Additional styling for code examples in output section */
+#output-section pre {
+    background: #eee;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #444;
+    overflow: auto;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
